@@ -1,0 +1,126 @@
+html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة تفكيك سيارة Renault Clio Campus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .controls {
+            margin: 20px;
+        }
+        .game-container {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+        .car-area, .parts-area {
+            width: 45%;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+            margin: 10px;
+        }
+        .drop-zone {
+            min-height: 200px;
+            border: 2px dashed #999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            padding: 10px;
+        }
+        .draggable {
+            width: 100px;
+            cursor: grab;
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🚗 لعبة تفكيك سيارة Renault Clio Campus 🛠️</h1>
+        <p>قم بتفكيك أجزاء السيارة عن طريق سحبها وإفلاتها في المكان المناسب.</p>
+    </header>
+    
+    <div class="controls">
+        <button id="startGame">🔄 إعادة التشغيل</button>
+        <span id="timer">⏳ الوقت: 0 ثانية</span>
+    </div>
+    
+    <div class="game-container">
+        <div class="car-area">
+            <h2>السيارة</h2>
+            <div id="car-body" class="drop-zone">
+                <img src="https://via.placeholder.com/300x150" alt="هيكل السيارة">
+            </div>
+        </div>
+        
+        <div class="parts-area">
+            <h2>الأجزاء</h2>
+            <div id="parts">
+                <img src="https://via.placeholder.com/100" alt="عجلة" class="draggable" draggable="true" id="wheel">
+                <img src="https://via.placeholder.com/100" alt="محرك" class="draggable" draggable="true" id="engine">
+                <img src="https://via.placeholder.com/100" alt="باب" class="draggable" draggable="true" id="door">
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>🎮 استمتع بتفكيك وتجميع السيارة! 🚗💨</p>
+    </footer>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const parts = document.querySelectorAll(".draggable");
+            const carBody = document.getElementById("car-body");
+            
+            parts.forEach(part => {
+                part.addEventListener("dragstart", (event) => {
+                    event.dataTransfer.setData("id", event.target.id);
+                });
+            });
+            
+            carBody.addEventListener("dragover", (event) => {
+                event.preventDefault();
+            });
+            
+            carBody.addEventListener("drop", (event) => {
+                event.preventDefault();
+                const id = event.dataTransfer.getData("id");
+                const draggedElement = document.getElementById(id);
+                carBody.appendChild(draggedElement);
+                draggedElement.style.cursor = "default";
+            });
+        });script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const parts = document.querySelectorAll(".draggable");
+            const carBody = document.getElementById("car-body");
+            
+            parts.forEach(part => {
+                part.addEventListener("dragstart", (event) => {
+                    event.dataTransfer.setData("id", event.target.id);
+                });
+            });
+            
+            carBody.addEventListener("dragover", (event) => {
+                event.preventDefault();
+            });
+            
+            carBody.addEventListener("drop", (event) => {
+                event.preventDefault();
+                const id = event.dataTransfer.getData("id");
+                const draggedElement = document.getElementById(id);
+                carBody.appendChild(draggedElement);
+                draggedElement.style.cursor = "default";
+            });
+        });
+    </script>
+</body>
+</html>
